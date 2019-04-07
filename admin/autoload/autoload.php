@@ -1,7 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: DELL
- * Date: 3/29/2019
- * Time: 9:37 PM
- */
+    require_once  __DIR__."/../../libraries/Database.php";
+    require_once  __DIR__."/../../libraries/Function.php";
+    $db = new Database ;
+?>
