@@ -12,16 +12,19 @@
     <title>Trang Admin</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/motor/public/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url()?>public/admin/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
-    <link href="/motor/public/admin/css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url()?>public/admin/css/sb-admin.css">
+<!--    <link href="/motor/public/admin/css/sb-admin.css" rel="stylesheet">-->
 
     <!-- Morris Charts CSS -->
-    <link href="/motor/public/admin/css/plugins/morris.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url()?>public/admin/css/plugins/morris.css">
+<!--    <link href="/motor/public/admin/css/plugins/morris.css" rel="stylesheet">-->
 
     <!-- Custom Fonts -->
-    <link href="/motor/public/admin/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url()?>public/admin/css/font-awesome.min.css">
+<!--    <link href="/motor/public/admin/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
 
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -106,13 +109,18 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="active">
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Bảng điều khiển</a>
+                <li class="">
+                    <a href="<?php echo base_url() ?>admin"><i class="fa fa-fw fa-dashboard"></i> Bảng điều khiển</a>
+                </li>
+
+                <li class="<?php echo isset($open) && $open == 'category' ? 'active' : '' ?>">
+                    <a href="<?php echo modules('category')?>"><i class="fa fa-list"></i> Danh mục sản phẩm</a>
                 </li>
 
                 <li>
-                    <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
                 </li>
+
                 <li>
                     <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
                 </li>

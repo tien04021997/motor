@@ -1,6 +1,8 @@
 <?php
+    $open = 'category';
     require_once  __DIR__."/../../autoload/autoload.php";
-    $db = new Database ;
+
+    $category = $db->fetchAll('category');
 ?>
 
 
@@ -23,6 +25,24 @@
                     <i class="fa fa-file"></i> Danh mục
                 </li>
             </ol>
+            <div class="clearfix"></div>
+            <?php if (isset($_SESSION['success'])) : ?>
+                <div class="alert alert-warning">
+                    <?php
+                        echo $_SESSION['success'];
+                        unset($_SESSION['success']);
+                    ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['error'])) : ?>
+                <div class="alert alert-danger">
+                    <?php
+                    echo $_SESSION['error'];
+                    unset($_SESSION['error']);
+                    ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
     <!-- /.row -->
@@ -32,78 +52,65 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>Page</th>
-                        <th>Visits</th>
-                        <th>% New Visits</th>
-                        <th>Revenue</th>
+                        <th>STT</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Slug</th>
+                        <th>Created</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>/index.html</td>
-                        <td>1265</td>
-                        <td>32.3%</td>
-                        <td>$321.33</td>
-                    </tr>
-                    <tr>
-                        <td>/about.html</td>
-                        <td>261</td>
-                        <td>33.3%</td>
-                        <td>$234.12</td>
-                    </tr>
-                    <tr>
-                        <td>/sales.html</td>
-                        <td>665</td>
-                        <td>21.3%</td>
-                        <td>$16.34</td>
-                    </tr>
-                    <tr>
-                        <td>/blog.html</td>
-                        <td>9516</td>
-                        <td>89.3%</td>
-                        <td>$1644.43</td>
-                    </tr>
-                    <tr>
-                        <td>/404.html</td>
-                        <td>23</td>
-                        <td>34.3%</td>
-                        <td>$23.52</td>
-                    </tr>
-                    <tr>
-                        <td>/services.html</td>
-                        <td>421</td>
-                        <td>60.3%</td>
-                        <td>$724.32</td>
-                    </tr>
-                    <tr>
-                        <td>/blog/post.html</td>
-                        <td>1233</td>
-                        <td>93.2%</td>
-                        <td>$126.34</td>
-                    </tr>
+                        <?php $stt = 1; foreach ($category as $item): ?>
+                            <tr>
+                                <td>
+                                    <?php echo $stt ?>
+                                </td>
+                                <td>
+                                    <?php echo $item['id'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $item['name'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $item['slug'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $item['created_at'] ?>
+                                </td>
+                                <td>
+                                    <a class="btn btn-xs btn-info" href="edit.php?id=<?php echo $item['id'] ?>">
+                                        <i class="fa fa-edit"></i> Sửa
+                                    </a>
+                                    <a class="btn btn-xs btn-danger" href="delete.php?id=<?php echo $item['id'] ?>">
+                                        <i class="fa fa-times"></i> Xóa
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php $stt++ ; endforeach; ?>
                     </tbody>
                 </table>
-                <div class="category-pagination pull-right">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+<!--                <div class="category-pagination pull-right">-->
+<!--                    <nav aria-label="Page navigation example">-->
+<!--                        <ul class="pagination">-->
+<!--                            <li class="page-item">-->
+<!--                                <a class="page-link" href="#" aria-label="Previous">-->
+<!--                                    <span aria-hidden="true">&laquo;</span>-->
+<!--                                    <span class="sr-only">Previous</span>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                            <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                            <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                            <li class="page-item">-->
+<!--                                <a class="page-link" href="#" aria-label="Next">-->
+<!--                                    <span aria-hidden="true">&raquo;</span>-->
+<!--                                    <span class="sr-only">Next</span>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </nav>-->
+<!--                </div>-->
             </div>
         </div>
     </div>

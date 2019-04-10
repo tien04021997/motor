@@ -2,7 +2,7 @@
     require_once  __DIR__."/autoload/autoload.php";
     $db = new Database ;
     $category = $db->fetchAll("category");
-    var_dump($category);
+//    var_dump($category);
 ?>
 
 

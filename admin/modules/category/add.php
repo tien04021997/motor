@@ -1,10 +1,12 @@
 <?php
+    $open = "category";
     require_once  __DIR__."/../../autoload/autoload.php";
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $data =
             [
-                "name" => postInput("name")
+                "name" => postInput("name"),
+                "slug" => to_slug(postInput("name"))
             ];
 
         $error = [];
@@ -18,7 +20,17 @@
         if (empty($error))
         {
             $id_insert = $db->insert('category', $data);
-            print_r($id_insert);
+            if ($id_insert > 0)
+            {
+                $_SESSION['success'] = "Thêm mới thành công";
+                redirectAdmin("category");
+            }
+            else
+            {
+                // Thêm thất bại
+                $_SESSION['error'] = "Thêm mới thất bại";
+
+            }
         }
     }
 
