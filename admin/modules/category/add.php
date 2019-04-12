@@ -17,19 +17,42 @@
         }
 
         // Nếu error trống có nghĩa là không có lỗi
+//        if (empty($error))
+//        {
+//            $id_insert = $db->insert('category', $data);
+//            if ($id_insert > 0)
+//            {
+//                $_SESSION['success'] = "Thêm mới thành công";
+//                redirectAdmin("category");
+//            }
+//            else
+//            {
+//                // Thêm thất bại
+//                $_SESSION['error'] = "Thêm mới thất bại";
+//
+//            }
+//        }
+
         if (empty($error))
         {
-            $id_insert = $db->insert('category', $data);
-            if ($id_insert > 0)
+
+            $isset = $db->fetchOne("category","name = '".$data['name']."' ");
+            if (count($isset) > 0)
             {
-                $_SESSION['success'] = "Thêm mới thành công";
-                redirectAdmin("category");
+                $_SESSION['error'] = "Tên danh mục đã tồn tại !";
             }
             else
             {
-                // Thêm thất bại
-                $_SESSION['error'] = "Thêm mới thất bại";
-
+                $id_insert = $db->insert("category", $data);
+                if ($id_insert > 0)
+                {
+                    $_SESSION['success'] = "Thêm mới thành công";
+                    redirectAdmin("category");
+                }
+                else
+                {
+                    $_SESSION['error'] = "Thêm mới thất bại";
+                }
             }
         }
     }
@@ -56,6 +79,10 @@
                     <i class="fa fa-file"></i> Thêm mới
                 </li>
             </ol>
+            <!--Thông báo lỗi-->
+            <?php require_once __DIR__."/../../../partials/notification.php"; ?>
+
+
         </div>
     </div>
     <!-- /.row -->

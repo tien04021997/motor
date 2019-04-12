@@ -30,19 +30,52 @@
         // Nếu error trống có nghĩa là không có lỗi
         if (empty($error))
         {
-            $id_update = $db->update('category', $data, array("id" => $id));
-            if ($id_update > 0)
+            // Kiểm tra nếu tên danh mục ($EditCategory['name']) khác hay có sửa đổi so với $data['name']) thì sẽ check
+            // kiểm tra xem tên danh mục có trùng nhau hay không
+
+            if ($EditCategory['name'] != $data['name'])
             {
-                $_SESSION['success'] = "Cập nhật thành công";
-                redirectAdmin("category");
+                $isset = $db->fetchOne("category","name = '".$data['name']."' ");
+                if (count($isset) > 0)
+                {
+                    $_SESSION['error'] = "Tên danh mục đã tồn tại !";
+                }
+                else
+                {
+                    $id_update = $db->update('category', $data, array("id" => $id));
+                    if ($id_update > 0)
+                    {
+                        $_SESSION['success'] = "Cập nhật thành công";
+                        redirectAdmin("category");
+                    }
+                    else
+                    {
+                        // Cập nhật thất bại
+                        $_SESSION['error'] = "Dữ liệu không thay đổi !";
+                        redirectAdmin("category");
+
+                    }
+                }
             }
+
+            // Ngược lại thì cập nhật bình thường
+
             else
             {
-                // Cập nhật thất bại
-                $_SESSION['error'] = "Cập nhật thất bại";
-                redirectAdmin("category");
-
+                $id_update = $db->update('category', $data, array("id" => $id));
+                if ($id_update > 0)
+                {
+                    $_SESSION['success'] = "Cập nhật thành công";
+                    redirectAdmin("category");
+                }
+                else
+                {
+                    // Cập nhật thất bại
+                    $_SESSION['error'] = "Dữ liệu không thay đổi !";
+                    redirectAdmin("category");
+                }
             }
+
         }
     }
 
@@ -68,6 +101,11 @@
                     <i class="fa fa-file"></i> Thêm mới
                 </li>
             </ol>
+            <div class="clearfix"></div>
+            <!--Thông báo lỗi-->
+            <?php require_once __DIR__."/../../../partials/notification.php"; ?>
+
+
         </div>
     </div>
     <!-- /.row -->

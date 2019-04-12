@@ -26,23 +26,9 @@
                 </li>
             </ol>
             <div class="clearfix"></div>
-            <?php if (isset($_SESSION['success'])) : ?>
-                <div class="alert alert-warning">
-                    <?php
-                        echo $_SESSION['success'];
-                        unset($_SESSION['success']);
-                    ?>
-                </div>
-            <?php endif; ?>
+            <!--Thông báo lỗi-->
+            <?php require_once __DIR__."/../../../partials/notification.php"; ?>
 
-            <?php if (isset($_SESSION['error'])) : ?>
-                <div class="alert alert-danger">
-                    <?php
-                    echo $_SESSION['error'];
-                    unset($_SESSION['error']);
-                    ?>
-                </div>
-            <?php endif; ?>
         </div>
     </div>
     <!-- /.row -->
