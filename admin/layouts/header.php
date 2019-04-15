@@ -117,6 +117,10 @@
                     <a href="<?php echo modules('category')?>"><i class="fa fa-list"></i> Danh mục sản phẩm</a>
                 </li>
 
+                <li class="<?php echo isset($open) && $open == 'product' ? 'active' : '' ?>">
+                    <a href="<?php echo modules('product')?>"><i class="fa fa-gift"></i> Sản phẩm</a>
+                </li>
+
                 <li>
                     <a href="bootstrap-elements.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
                 </li>
